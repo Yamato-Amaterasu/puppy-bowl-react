@@ -1,26 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   return (
     <div className="topPart">
       <nav>
         <ul className="navBar">
-          <a id="home" href="/">
-            HOME{" "}
-          </a>
-          <a id="form" href="/form">
-            {" "}
+          <Link to="/" id="home">
+            HOME
+          </Link>
+
+          <Link to="/form" id="form">
             SUBMISSION FORM
-          </a>
+          </Link>
         </ul>
       </nav>
-      <div className="searchBar">
-        <label>Name:</label>
-        <input type="text" placeholder="Enter Dog Name Here"></input>
-        <label>Breed:</label>
-        <input type="text" placeholder="Enter Dog Breed Here"></input>
-        <button type="submit">Search</button>
-      </div>
     </div>
   );
 };

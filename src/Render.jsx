@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { ReactDOM } from "react-dom/client";
-import { fetchAllPlayers } from "./Api";
-import { Router } from "react-router-dom";
+import { FetchAllPlayers, FetchSinglePlayer } from "./Api";
+import { DogSearch } from "./SearchBar";
+import { SingleDog } from "./SingleDog";
 
 export const DogCards = () => {
   const [playerList, setPlayerList] = useState([]);
+  const [selectedDog, setSelectedDog] = useState([]);
+  console.dir(playerList);
 
   useEffect(() => {
-    fetchAllPlayers(setPlayerList);
+    FetchAllPlayers(setPlayerList);
   }, []);
 
-  const allTheDogs = playerList;
-
-  const List = allTheDogs.map((pup) => {
+  const List = playerList.map((pup) => {
     return (
       <div className="single-player-card" key={pup.id}>
         <div className="header-info">
@@ -20,7 +20,11 @@ export const DogCards = () => {
           <p className="pup-number">#{pup.id}</p>
         </div>
         <img src={pup.imageUrl} />
-        <button className="detail-button" data-id={pup.id}>
+        <button
+          onClick={() => setSelectedDog(pup)}
+          className="detail-button"
+          data-id={pup.id}
+        >
           See details
         </button>
         <button className="delete-button" data-id={pup.id}>
@@ -30,7 +34,16 @@ export const DogCards = () => {
     );
   });
 
-  // console.log(DummyData);
-
-  return <div id="dogList">{List}</div>;
+  return (
+    <div>
+      <DogSearch />
+      <div>
+        {selectedDog.id ? (
+          <SingleDog selectedDog={selectedDog} />
+        ) : (
+          <div id="dogList">{List} </div>
+        )}
+      </div>
+    </div>
+  );
 };

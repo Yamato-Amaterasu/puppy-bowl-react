@@ -14,7 +14,7 @@ export const FormDisplay = () => {
       <label>Picture:</label>
       <input type="text" placeholder="Enter Dog Image URl Here"></input>
 
-      <button type="submit">Search</button>
+      <button type="submit">Submit</button>
     </div>
   );
 };
